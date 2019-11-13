@@ -12,7 +12,7 @@ pool:
 variables:
   solution: './Client/Simitone/Simitone.sln'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release;OutDir=$(Build.ArtifactStagingDirectory)'
+  buildConfiguration: 'Release'
 
 steps:
 - checkout: self
@@ -41,9 +41,7 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-    msbuildArgs: /t:Simitone_Windows
+    msbuildArgs: '/t:Simitone_Windows /p:Configuration=Release|AnyCPU;OutDir=$(Build.ArtifactStagingDirectory)'
 
 - task: NuGetCommand@2
   inputs:
